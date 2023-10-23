@@ -26,6 +26,7 @@ public:
     unsigned int size() {  // Método que retorna o tamanho atual da lista;  // O(1)
         return size_;
     }
+
     // unsigned int capacitty() {} 
                                         // Nenhum desses dois métodos são possíveis de implementar em listas ligadas!!!
     // double percent_occupied() {}

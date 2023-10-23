@@ -34,7 +34,7 @@ public:
         double size = this->size_;
         return size/this->capacity_;
     }
-    bool insert_at(unsigned int index, int value) { // Método que insere um novo nó na posição desejada e atualiza o atributo tamanho;  // O(N)
+    bool insert_at(unsigned int index, int value) { // Método que insere um novo valor na posição desejada e atualiza o atributo tamanho;  // O(N)
         if (this->size_ == this->capacity_)
             increase_capacity();
         for (unsigned int i = 0; i < this->size_+1; i++){
@@ -51,7 +51,7 @@ public:
         }
         return false;
     }
-    bool remove_at(unsigned int index) { // Método que remove o nó presente no index informado e atualiza o atributo tamanho;  //  O(N)
+    bool remove_at(unsigned int index) { // Método que remove o valor armazenado no index informado e atualiza o atributo tamanho;  //  O(N)
         if (index >= this->size_)
             return false; // Não removeu
         for (unsigned int i = index + 1; i < this->size_; ++i) {
@@ -60,7 +60,7 @@ public:
         this->size_--;
         return true; // Removeu
     }
-    int get_at(unsigned int index) { //   Método que retorna o valor armazenado no nó que está no index fornecido;  //  O(N)
+    int get_at(unsigned int index) { //   Método que retorna o valor armazenado no index fornecido;  //  O(1)
         if (index >= this->size_){
             return false;
         }
@@ -69,12 +69,12 @@ public:
     void clear() {  // Método que zera o atributo tamanho da lista;   // O(1)
         this->size_ = 0;
     }
-    void push_back(int value) { // Método que insere um novo nó no FIM da lista e atualiza o atributo tamanho;  // O(1)
+    void push_back(int value) { // Método que insere um novo valor no FIM da lista e atualiza o atributo tamanho;  // O(1)
         if (this->size_ == this->capacity_)
             increase_capacity();
         this->data[size_++] = value;
     }
-    void push_front(int value) { // Método que insere um novo nó no INÍCIO da lista e atualiza o atributo tamanho;  // O(1)
+    void push_front(int value) { // Método que insere um novo valor no INÍCIO da lista e atualiza o atributo tamanho;  // O(N)
         if(this->size_ == this->capacity_)
             increase_capacity();
         for (unsigned i = this->size_; i > 0; i--){
@@ -83,14 +83,14 @@ public:
         data[0] = value;
         this->size_++;
     }
-    bool pop_back() { // Método que remove um novo nó no FIM da lista e atualiza o atributo tamanho;  // O(1)
+    bool pop_back() { // Método que remove o último valor da lista e atualiza o atributo tamanho;  // O(1)
         if(this->size_>0){
             this->size_--;
             return true;
         }
         return false;
     }
-    bool pop_front() { // Método que remove o nó no INÍCIO da lista e atualiza o atributo tamanho;  // O(1)
+    bool pop_front() { // Método que remove o primeiro valor da lista e atualiza o atributo tamanho;  // O(N)
         if (this->size_ > 0){
             for (unsigned int i = 0; i < this->size_; i++){
                 data[i] = data[i+1];
@@ -100,13 +100,13 @@ public:
         }
         return false;
     }
-    int front(){ // Método que retorna o valor armazenado no nó do INÍCIO da lista;  // O(1)
+    int front(){ // Método que retorna o valor armazenado na primeira posição da lista;  // O(1)
         return data[0];
     } 
-    int back(){ // Método que retorna o valor armazenado no nó do FIM da lista;  // O(1)
+    int back(){ // Método que retorna o valor armazenado na última posição da lista;  // O(1)
         return data[this->size_-1];
     }
-    bool remove(int value) { // Método que remove checa se o valor fornecido está presente na lista. Se estiver ele será removido;  // O(N)
+    bool remove(int value) { // Método que checa se o valor fornecido está presente na lista. Se estiver ele será removido;  // O(N)
         if (this->size_ == 0){
             return false;
         }
@@ -140,7 +140,7 @@ public:
         
         return count;
     }
-    int sum() { // Método que soma os valores em todos os nós da lista ;  // O(N)
+    int sum() { // Método que soma todos os valores armazenados na lista ;  // O(N)
         int sum = 0;
         for (unsigned int i = 0; i < this->size_; i++){
             sum+= data[i];
