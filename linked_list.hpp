@@ -1,7 +1,6 @@
 #ifndef __LINKED_LIST_IFRN__
 #define __LINKED_LIST_IFRN__
 
-
 class linked_list {
 private:
     struct int_node {
@@ -11,35 +10,30 @@ private:
     int_node* head, * tail;
     unsigned int size_;
 public:
-
-    linked_list() {
+    linked_list() {  // Método construtor que inicializa os ponteiros zerados; // O(1)
         this->head = 0;
         this->tail = 0;
         this->size_ = 0;
     }
-
-    ~linked_list() {
-        int_node* current = this->head;
+    ~linked_list() { // Método destrutor que deleta todos os ponteiros usados para nós;  // O(N)
+        int_node* current = this->head; 
         while (current != nullptr) {
             int_node* to_remove = current;
             current = current->next;
             delete to_remove;
         }
     }
-
-    unsigned int size() {
+    unsigned int size() {  // Método que retorna o tamanho atual da lista;  // O(1)
         return size_;
     }
-
-    // unsigned int capacitty() {}
-
+    // unsigned int capacitty() {} 
+                                        // Nenhum desses dois métodos são possíveis de implementar em listas ligadas!!!
     // double percent_occupied() {}
 
-    bool insert_at(unsigned int index, int value) {
+    bool insert_at(unsigned int index, int value) { // Método que insere um novo nó na posição desejada e atualiza o atributo tamanho;  // O(N)
         if(index > this->size_){
             return false;
         }
-        
         int_node *current = this->head;
         for (unsigned int i = 0; i < index; i++){            
             current = current->next;
@@ -58,10 +52,8 @@ public:
             this->size_++;
         }
         return true;
-        
     }
-
-    bool remove_at(unsigned int index) {
+    bool remove_at(unsigned int index) { // Método que remove o nó presente no index informado e atualiza o atributo tamanho;  //  O(N)
         if (index >= this->size_)
             return false; // Não removeu
         int_node* to_remove = this->head;
@@ -75,27 +67,20 @@ public:
         this->size_--;
         return true; // Removeu
     }
-
-    int get_at(unsigned int index) { //TESTADO OK
-        if (this->size_ == 0 || index >= size_)
-        {
+    int get_at(unsigned int index) { //   Método que retorna o valor armazenado no nó que está no index fornecido;  //  O(N)
+        if (this->size_ == 0 || index >= size_){
             return -1;
         }
-        
         int_node *current = this->head;
-        for (unsigned int i = 0; i < index; i++)
-        {
-            current = current->next;
-            
+        for (unsigned int i = 0; i < index; i++){
+            current = current->next; 
         }
         return current->value;
     }
-
-    void clear() { // TESTADO OK
+    void clear() { // Método que zera o atributo tamanho da lista;   // O(1)
         size_ = 0;
     }
-
-    void push_back(int value) { // TESTADO OK
+    void push_back(int value) { // Método que insere um novo nó no FIM da lista e atualiza o atributo tamanho;  // O(1)
         int_node* new_node = new int_node;
         new_node->value = value;
         new_node->next = nullptr;
@@ -108,8 +93,7 @@ public:
         this->tail = new_node;
         this->size_++;
     }
-
-    void push_front(int value) { //TESTADO OK
+    void push_front(int value) { // Método que insere um novo nó no INÍCIO da lista e atualiza o atributo tamanho;  // O(1)
         int_node* new_node = new int_node;
         new_node->value = value;
         new_node->next = this->head;
@@ -121,8 +105,7 @@ public:
         this->head = new_node;
         this->size_++;
     }
-
-    bool pop_back() { //TESTADO OK
+    bool pop_back() { // Método que remove um novo nó no FIM da lista e atualiza o atributo tamanho;  // O(1)
         if(this->tail == 0){
             return false;
         }
@@ -139,8 +122,7 @@ public:
         this->size_--;
         return true;
     }
-
-    bool pop_front() {      //TESTADO OK
+    bool pop_front() {  // Método que remove o nó no INÍCIO da lista e atualiza o atributo tamanho;  // O(1)
         if(this->head == 0){
             return false;
         }
@@ -156,22 +138,19 @@ public:
         this->size_--;
         return true;
     }
-
-    int front() { //TESTADO OK
+    int front() { // Método que retorna o valor armazenado no nó do INÍCIO da lista;  // O(1)
         if (this->head != 0)
             return this->head->value;
         else
             return -1;
     }
-
-    int back() { //TESTADO OK
+    int back() { // Método que retorna o valor armazenado no nó do FIM da lista;  // O(1)
         if (this->tail != 0)
             return this->tail->value;
         else
             return -1;
     }
-
-    bool remove(int value) {
+    bool remove(int value) {    // Método que remove checa se o valor fornecido está presente na lista. Se estiver ele será removido;  // O(N)
         int_node *current = this->head;
         int size = this->size_;
         for (int i = 0; i < size; i++){
@@ -194,48 +173,38 @@ public:
         }
         return false;
     }
-
-    int find(int value) { // TESTADO OK;
+    int find(int value) { // Método que checa se um valor está presente e retorna o seu índice;  // O(N)
         int_node *current = this->head;
         int size = this->size_;
-        for (int i = 0; i < size; i++)
-        {
+        for (int i = 0; i < size; i++){
             if(current->value == value){
                 return i;
             }
             current = current->next;
         }
-    
         return -1;
     }
-
-    int count(int value) { //TESTADO OK
+    int count(int value) { // Método que conta a quantidade de vezes que um valor se repete na lista ;  // O(N)
         int count = 0;
         int size = this->size_;
         int_node *current = this->head;
-        for (int i = 0; i < size; i++)
-        {
-            if (current->value == value)
-            {
+        for (int i = 0; i < size; i++){
+            if (current->value == value){
                 count++;
             }
             current = current->next;
         }
         return count;
     }
-
-    int sum() { // TESTADO OK
+    int sum() { // Método que soma os valores em todos os nós da lista ;  // O(N)
         int sum = 0;
         int_node *current = this->head;
         int size = this->size_;
-        for (int i = 0; i < size; i++)
-        {
+        for (int i = 0; i < size; i++){
             sum+= current->value;
             current = current->next;
         }
         return sum;
     }
 };
-
-
 #endif // __LINKED_LIST_IFRN__

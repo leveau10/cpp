@@ -1,14 +1,12 @@
 #ifndef __ARRAY_LIST_IFRN__
 #define __ARRAY_LIST_IFRN__
 
-
 class array_list {
 private:
     int* data;
-    unsigned int size_, capacity_, tam_;
-    void increase_capacity() {
-        this->tam_ += this->tam_;
-        this->capacity_= this->tam_;
+    unsigned int size_, capacity_;
+    void increase_capacity() {  // Método que aumenta a capacidade reservada dinamicamente;   //  O(N)
+        this->capacity_+= 100;
         int* new_array = new int[this->capacity_];
         for (unsigned int i = 0; i < this->size_; i++){
             new_array[i] = data[i];
@@ -18,26 +16,25 @@ private:
         data = new_array;
     } 
 public:
-    array_list() {
-        this->tam_ = 100;
-        data = new int[this->tam_];
+    array_list() { // Construtor // O(1)
+        data = new int[100];
         this->size_ = 0;
-        this->capacity_ = tam_;
+        this->capacity_ = 100;
     }
-    ~array_list() {
+    ~array_list() {  // Destrutor   // O(1)
         delete[] data;
     }
-    unsigned int size() {
+    unsigned int size() { // Método que retorna o tamanho atual da lista // O(1)
         return this->size_;
     }
-    unsigned int capacity() {
+    unsigned int capacity() {   // Método que retorna o espaço reservada dinamicamente; // O(1)
         return this->capacity_;
     }
-    double percent_occupied() {
+    double percent_occupied() {  // Método que retorna a porcentagem ocupada do espaço reservado dinamicamente; // O(1)
         double size = this->size_;
         return size/this->capacity_;
     }
-    bool insert_at(unsigned int index, int value) {
+    bool insert_at(unsigned int index, int value) { // Método que insere um novo nó na posição desejada e atualiza o atributo tamanho;  // O(N)
         if (this->size_ == this->capacity_)
             increase_capacity();
         for (unsigned int i = 0; i < this->size_+1; i++){
@@ -52,11 +49,9 @@ public:
                 return true;
             }
         }
-        
-
         return false;
     }
-    bool remove_at(unsigned int index) {
+    bool remove_at(unsigned int index) { // Método que remove o nó presente no index informado e atualiza o atributo tamanho;  //  O(N)
         if (index >= this->size_)
             return false; // Não removeu
         for (unsigned int i = index + 1; i < this->size_; ++i) {
@@ -65,23 +60,21 @@ public:
         this->size_--;
         return true; // Removeu
     }
-    int get_at(unsigned int index) {
+    int get_at(unsigned int index) { //   Método que retorna o valor armazenado no nó que está no index fornecido;  //  O(N)
         if (index >= this->size_){
             return false;
         }
-        
-        // TODO: Check if index is valid
         return this->data[index];
     }
-    void clear() {
+    void clear() {  // Método que zera o atributo tamanho da lista;   // O(1)
         this->size_ = 0;
     }
-    void push_back(int value) {
+    void push_back(int value) { // Método que insere um novo nó no FIM da lista e atualiza o atributo tamanho;  // O(1)
         if (this->size_ == this->capacity_)
             increase_capacity();
         this->data[size_++] = value;
     }
-    void push_front(int value) {
+    void push_front(int value) { // Método que insere um novo nó no INÍCIO da lista e atualiza o atributo tamanho;  // O(1)
         if(this->size_ == this->capacity_)
             increase_capacity();
         for (unsigned i = this->size_; i > 0; i--){
@@ -90,34 +83,30 @@ public:
         data[0] = value;
         this->size_++;
     }
-    bool pop_back() {
+    bool pop_back() { // Método que remove um novo nó no FIM da lista e atualiza o atributo tamanho;  // O(1)
         if(this->size_>0){
             this->size_--;
             return true;
         }
         return false;
-        
     }
-    bool pop_front() {
+    bool pop_front() { // Método que remove o nó no INÍCIO da lista e atualiza o atributo tamanho;  // O(1)
         if (this->size_ > 0){
             for (unsigned int i = 0; i < this->size_; i++){
                 data[i] = data[i+1];
             }
-
             this->size_--;
             return true;
-            
         }
         return false;
-        
     }
-    int front(){
+    int front(){ // Método que retorna o valor armazenado no nó do INÍCIO da lista;  // O(1)
         return data[0];
-    }
-    int back(){
+    } 
+    int back(){ // Método que retorna o valor armazenado no nó do FIM da lista;  // O(1)
         return data[this->size_-1];
     }
-    bool remove(int value) {
+    bool remove(int value) { // Método que remove checa se o valor fornecido está presente na lista. Se estiver ele será removido;  // O(N)
         if (this->size_ == 0){
             return false;
         }
@@ -132,7 +121,7 @@ public:
         }
         return false;
     }
-    int find(int value) {
+    int find(int value) { // Método que checa se um valor está presente e retorna o seu índice;  // O(N)
         for (unsigned int i = 0; i < this->size_; i++){
             if (data[i] == value) {
                 return i;
@@ -141,7 +130,7 @@ public:
         }
         return -1;
     }
-    int count(int value) {
+    int count(int value) { // Método que conta a quantidade de vezes que um valor se repete na lista ;  // O(N)
         int count = 0;
         for (unsigned int i = 0; i < this->size_; i++){
             if(data[i] == value){
@@ -151,7 +140,7 @@ public:
         
         return count;
     }
-    int sum() {
+    int sum() { // Método que soma os valores em todos os nós da lista ;  // O(N)
         int sum = 0;
         for (unsigned int i = 0; i < this->size_; i++){
             sum+= data[i];
@@ -159,5 +148,4 @@ public:
         return sum;
     }
 };
-
 #endif // __ARRAY_LIST_IFRN__
