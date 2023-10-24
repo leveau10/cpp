@@ -26,11 +26,16 @@ public:
     unsigned int size() {  // Método que retorna o tamanho atual da lista;  // O(1)
         return size_;
     }
-
-    // unsigned int capacitty() {} 
-                                        // Nenhum desses dois métodos são possíveis de implementar em listas ligadas!!!
-    // double percent_occupied() {}
-
+    unsigned int capacitty() {
+        return this->size_;
+    } 
+    double percent_occupied() {
+        if (this->size_ > 0){
+            return 1.0;
+        }else{
+            return 0.0;
+        }    
+    }
     bool insert_at(unsigned int index, int value) { // Método que insere um novo nó na posição desejada e atualiza o atributo tamanho;  // O(N)
         if(index > this->size_){
             return false;
