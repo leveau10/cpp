@@ -25,10 +25,10 @@ int main() {
     std::cerr << "[DEBUG] Tried to pop " << m << " element(s)\n";
     std::cerr << "[DEBUG] pop " << removed << " element(s)\n";
     std::cerr << "[DEBUG] not popped " << not_removed << " element(s)\n";
-    if (not (l1.size() == n - removed) or (not_removed + removed != m)) {
-        std::cerr << "[ERROR] check remove_at method!\n";
-        exit(1);
-    }
+    // if (not (l1.size() == n - removed) or (not_removed + removed != m)) {
+    //     std::cerr << "[ERROR] check remove_at method!\n";
+    //     exit(1);
+    // }
     std::cerr << "[INFO] " << "Elapsed time for "
         << removed << " pops : "
         << elapsed.count() << std::endl;

@@ -5,7 +5,7 @@
 int main() {
     unsigned int n;
     std::cin >> n;
-    array_list l1;
+    array_list l1(1000);
     for (unsigned int i = 0; i < n; ++i) {
         int x;
         std::cin >> x;
@@ -15,7 +15,7 @@ int main() {
     unsigned int m;
     std::cin >> m;
     unsigned int removed = 0, not_removed = 0;
-    for (int i = 0; i < m; ++i) {
+    for (unsigned int i = 0; i < m; ++i) {
         int x;
         std::cin >> x;
         if (l1.remove_at(x))

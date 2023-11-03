@@ -5,7 +5,7 @@
 int main() {
     unsigned int n;
     std::cin >> n;
-    array_list l1;
+    array_list l1(1000);
     for (unsigned int i = 0; i < n; ++i) {
         int x;
         std::cin >> x;

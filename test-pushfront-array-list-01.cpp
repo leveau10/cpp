@@ -3,11 +3,11 @@
 #include "array_list.hpp"
 
 int main() {
-    int n;
+    unsigned int n;
     std::cin >> n;
-    array_list l1;
+    array_list l1(1000);   ///começa com 100 e aumenta de 100 em 100
     auto beg = std::chrono::high_resolution_clock::now();
-    for (int i = 0; i < n; ++i) {
+    for (unsigned i = 0; i < n; ++i) {
         int x;
         std::cin >> x;
         l1.push_front(x);

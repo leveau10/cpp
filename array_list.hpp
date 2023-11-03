@@ -4,22 +4,35 @@
 class array_list {
 private:
     int* data;
-    unsigned int size_, capacity_;
+    unsigned int size_, capacity_, increase_;
+
     void increase_capacity() {  // Método que aumenta a capacidade reservada dinamicamente;   //  O(N)
-        this->capacity_+= 100;
+        if(this->increase_ == 8){
+            this->capacity_= this->capacity_*2;
+        }else{
+            this->capacity_+= this->increase_;
+        }
         int* new_array = new int[this->capacity_];
         for (unsigned int i = 0; i < this->size_; i++){
-            new_array[i] = data[i];
-        }
+                new_array[i] = data[i];
+            }
         int* old_array = data;
         delete [] old_array;
         data = new_array;
+        
     } 
 public:
     array_list() { // Construtor // O(1)
         data = new int[100];
         this->size_ = 0;
         this->capacity_ = 100;
+        this->increase_ = 100;
+    }
+    array_list(unsigned int cpcty){  // Construtor // O(1)
+        data = new int[cpcty];
+        this->size_ = 0;
+        this->capacity_ = cpcty;
+        this->increase_ = cpcty;
     }
     ~array_list() {  // Destrutor   // O(1)
         delete[] data;
