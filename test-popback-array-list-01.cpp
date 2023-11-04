@@ -5,7 +5,7 @@
 int main() {
     unsigned int n;
     std::cin >> n;
-    array_list l1(1000);
+    array_list l1(8);
     for (unsigned int i = 0; i < n; ++i) {
         int x;
         std::cin >> x;
@@ -30,7 +30,7 @@ int main() {
         exit(1);
     }
     std::cerr << "[INFO] " << "Elapsed time for "
-        << removed << " pop_front success : "
+        << removed << " pop_back success : "
         << elapsed.count() << std::endl;
     return 0;
 }
